@@ -36,7 +36,8 @@ const UsuarioSchema = Schema({
 
 //sobrescribir el método para que no lo muestre pero que sí lo guarde en mongo
 UsuarioSchema.methods.toJSON = function() {
-  const { __v, password, ...usuario } = this.toObject();
+  const { __v, password, _id, ...usuario } = this.toObject();
+  usuario.uid = _id;
   return usuario;
 }
 

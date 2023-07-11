@@ -79,10 +79,7 @@ const usuariosDelete = async(req, res) => {
   // const usuario = await Usuario.findByIdAndDelete( id );
   const usuario = await Usuario.findByIdAndUpdate(id, { estado: false });
 
-  res.json({
-    ok: true,
-    msg: 'delete API - controller' 
-  })
+  res.json({usuario})
 }
 
 module.exports = {
