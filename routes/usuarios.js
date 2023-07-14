@@ -42,7 +42,7 @@ router.post(
     }),
     check("correo", "El correo no es válido").isEmail(),
     // check('rol','No es un rol válido').isIn(['ADMIN_ROLE','USER_ROLE']),
-    check("rol").custom(esRolValido), //el parametro se obvia
+    // check("rol").custom(esRolValido), //el parametro se obvia
     check("correo").custom(EmailExiste),
     validarCampos,
   ],

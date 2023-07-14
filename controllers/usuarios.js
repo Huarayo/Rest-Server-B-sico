@@ -51,23 +51,28 @@ const usuariosPut = async (req, res = response) => {
 
 
 const usuariosPost = async(req, res = response) => {
-
-  const { nombre, correo, password, rol} = req.body;
-  const usuario = new Usuario( { nombre, correo, password, rol} );
   
-  //Verificar si el correo existe
+  try {
+    const { nombre, correo, password, rol} = req.body;
+    const usuario = new Usuario( { nombre, correo, password, rol} );
+    
+    //Verificar si el correo existe
+    // console.log("leonidas")
 
+    //Encriptar la contraseña
+    const salt = bcriptjs.genSaltSync();
+    usuario.password = bcriptjs.hashSync( password, salt );
 
-  //Encriptar la contraseña
-  const salt = bcriptjs.genSaltSync();
-  usuario.password = bcriptjs.hashSync( password, salt );
+    //Guardar en BD
+    await usuario.save();
 
-  //Guardar en BD
-  await usuario.save();
+    res.json({
+      usuario
+    });
+  } catch (err) {
+    console.log(err)
+  }
 
-  res.json({
-    usuario
-  });
 
 }
 
